@@ -9,7 +9,7 @@ DualVNH5019MotorShield::DualVNH5019MotorShield()
   _INB1 = 27;
   _PWM1 = 9;
   _EN1DIAG1 = 6;
-  _CS1 = A3;
+  _CS1 = A0;
   _INA2 = 25;
   _INB2 = 23;
   _PWM2 = 10;
