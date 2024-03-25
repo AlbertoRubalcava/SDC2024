@@ -2,16 +2,17 @@
 #include "DualVNH5019MotorShield.h"
 #include <SoftwareSerial.h>
 #include <Servo.h>
-SoftwareSerial mySerial(52,53);//Define software serial, 53 is TX, 52 is RX
-char buff[4]={0x80,0x06,0x03,0x77};
-unsigned char data[11]={0};
+
+SoftwareSerial mySerial(52,53); //Define software serial, 53 is TX, 52 is RX
+char buff[4]={0x80,0x06,0x03,0x77}; //distance
+unsigned char data[11]={0}; //distance
 
 DualVNH5019MotorShield md;
 
 Servo myservo;
 
-const int dirPin = 11;  // Direction
-const int stepPin = 8; // Step
+const int dirPin = 11; 
+const int stepPin = 8; 
 
 USB Usb;
 XBOXRECV Xbox(&Usb);

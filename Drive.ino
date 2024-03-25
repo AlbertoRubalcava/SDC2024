@@ -20,7 +20,7 @@ void moveRobot(int leftSpeed, int rightSpeed) {
 void killDrive(){
   md.setM1Speed(0);
   md.setM2Speed(0);
-  //Write to LCD Screen Error
+  //Write to LCD Screen - Error
 }
 
 void stopIfFault(){
