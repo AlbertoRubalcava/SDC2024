@@ -10,10 +10,10 @@ void drive(){
     int rightSpeed = map(rightHatX, -32768, 32767, -400, 400);
 
         moveRobot(leftSpeed, rightSpeed);
-        stopIfFault();
+        //stopIfFault();
   } 
 
-  if(Xbox.getAnalogHat(RightHatY, i) > 5000 || Xbox.getAnalogHat(RightHatY, i) < -5000){
+  else if(Xbox.getAnalogHat(RightHatY, i) > 5000 || Xbox.getAnalogHat(RightHatY, i) < -5000){
     int rightHatY = Xbox.getAnalogHat(RightHatY, i);
 
     int speed = map(rightHatY, -32768, 32767, -400, 400);
@@ -21,7 +21,7 @@ void drive(){
     moveRobot(speed,speed);
   }
 
-  if(Xbox.getAnalogHat(RightHatX, i) > 5000){
+  else if(Xbox.getAnalogHat(RightHatX, i) > 5000){
     int rightHatX = Xbox.getAnalogHat(RightHatX, i);
 
     int speed = map(rightHatX, -32768, 32767, -400, 400);
@@ -29,7 +29,7 @@ void drive(){
     moveRobot(speed,0); //turn right
   }
 
-  if(Xbox.getAnalogHat(RightHatX, i) < -5000){
+  else if(Xbox.getAnalogHat(RightHatX, i) < -5000){
     int rightHatX = Xbox.getAnalogHat(RightHatX, i);
 
     int speed = map(rightHatX, -32768, 32767, -400, 400);

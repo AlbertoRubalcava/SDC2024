@@ -3,29 +3,30 @@ int i = 0;
 int pos = 0; //default position
 int putter = 0; //default putter angle
 
+int minPos = 0; // Minimum servo position for the swing
+int maxPos = 90; // Maximum servo position for the swing
+
 const int maxStep = 50; //200 Steps per revolution for 200/4 = 50 for 90 degree adjustment
 const int nineDegree = 5; //Change 9 degrees per click - 90/9 = 10 different adjustments, so 50/10 is 5 steps per 9 degrees
-
 int stepSize = 1; // Change in angle per step, Smaller = Slower : Greater = Faster
 unsigned long stepDelay = 11; // Greater = Slower : Smaller = Faster
 
 void arm(){
   if (Xbox.getButtonClick(A, i)){ 
     Serial.println(F("A : Swing!"));
-      for (int pos = 0; pos <= 90; pos += stepSize) {  // most likely want to change this to go up slower/constant
+      for (int pos = minPos; pos <= maxPos; pos += stepSize) {  // most likely want to change this to go up slower/constant
         myservo.write(pos);            
         delay(stepDelay);              
       }
   
-    delay(2000);
+    delay(1000);
 
       // Move back from 90 degrees to 0 degrees
-      for (int pos = 90; pos >= 0; pos -= stepSize) { 
+      for (int pos = maxPos; pos >= minPos; pos -= stepSize) { 
         myservo.write(pos);             
         delay(stepDelay);              
       }
  }
-
 
   if(Xbox.getButtonClick(LB,i) || Xbox.getButtonClick(RB, i)){
     adjustPutter();
@@ -70,15 +71,15 @@ void adjustPutter(){
 
 
 
-void adjustPower(){
+void adjustPower(){ // or adjust position
   if (Xbox.getButtonClick(UP, i)) {
-    Serial.println(F("Up : Increasing Force"));
-    if(stepDelay >=1) //ensure stepDelay doesnt go below 0
+    if(stepDelay >=1){ //ensure stepDelay doesnt go below 0
       stepDelay -= 5; // Smaller the number the faster
+      Serial.println(F("Up : Increasing Force " +stepDelay));
   }
     if (Xbox.getButtonClick(DOWN, i)) {
-    Serial.println(F("Down : Decreasing Force"));
+      Serial.println(F("Down : Decreasing Force " +stepDelay));
       stepDelay += 5;
     }
-  
+  }
 }
