@@ -1,4 +1,3 @@
-//Comment
 void laser(){
   if (Xbox.getButtonClick(B, i)){
 
