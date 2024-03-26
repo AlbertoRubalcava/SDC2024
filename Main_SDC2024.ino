@@ -3,6 +3,11 @@
 #include <SoftwareSerial.h>
 #include <Servo.h>
 
+#ifdef dobogusinclude
+#include <spi4teensy3.h>
+#endif
+#include <SPI.h>
+
 SoftwareSerial mySerial(52,53); //Define software serial, 53 is TX, 52 is RX
 char buff[4]={0x80,0x06,0x03,0x77}; //distance
 unsigned char data[11]={0}; //distance
@@ -18,7 +23,7 @@ USB Usb;
 XBOXRECV Xbox(&Usb);
 
 bool laserStatus = false;
-digitalWrite(31,LOW); // inialize laser to off
+
 
 void setup() {
   Serial.begin(115200);
@@ -38,6 +43,8 @@ void setup() {
   pinMode(dirPin,OUTPUT); //stepper
 
   md.init(); //motors
+
+  digitalWrite(31,LOW); // inialize laser to off
 }
 
 void loop(){
