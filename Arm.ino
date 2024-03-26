@@ -1,3 +1,5 @@
+int i = 0;
+
 int pos = 0; //default position
 int putter = 0; //default putter angle
 
@@ -15,7 +17,7 @@ void arm(){
         delay(stepDelay);              
       }
   
-    delay(2000)
+    delay(2000);
 
       // Move back from 90 degrees to 0 degrees
       for (int pos = 90; pos >= 0; pos -= stepSize) { 
