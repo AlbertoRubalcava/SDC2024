@@ -36,6 +36,9 @@ void drive(){
 
     moveRobot(0,speed); //turn left
   }
+  else{
+    moveRobot(0,0);
+  }
 
 }
 
