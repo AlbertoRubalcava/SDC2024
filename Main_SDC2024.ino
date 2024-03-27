@@ -21,6 +21,7 @@ const int stepPin = 8;
 
 USB Usb;
 XBOXRECV Xbox(&Usb);
+int i = 0; //controller initialization
 
 bool laserStatus = false;
 
@@ -36,14 +37,14 @@ void setup() {
   }
   Serial.print(F("\r\nXbox Wireless Receiver Library Started"));
 
-  //myservo.attach(7); //servo
+  myservo.attach(7); //servo
 
-  //pinMode(stepPin,OUTPUT);  //stepper
-  //pinMode(dirPin,OUTPUT); //stepper
+  pinMode(stepPin,OUTPUT);  //stepper
+  pinMode(dirPin,OUTPUT); //stepper
 
   md.init(); //motors
 
-  //digitalWrite(31,LOW); // initialize laser to off
+  digitalWrite(31,LOW); // initialize laser to off
 }
 
 void drive(); 
@@ -58,9 +59,9 @@ void loop(){
   if (Xbox.XboxReceiverConnected) {
     if (Xbox.Xbox360Connected[0]) {
       drive();
-      //arm();
-      //laser();
-      //distance();
+      arm();
+      laser();
+      distance();
     }
     else{
       killDrive(); //kill drive motors if controller disconnects

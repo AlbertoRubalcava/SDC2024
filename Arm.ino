@@ -1,5 +1,3 @@
-int i = 0;
-
 int pos = 0; //default position
 int putter = 0; //default putter angle
 
@@ -40,7 +38,7 @@ void arm(){
 void adjustPutter(){
   if (Xbox.getButtonClick(LB, i)){
     Serial.println(F("LB : Decreasing Putter Angle"));
-    if (putter - nineDegree >= 0) { // Check if moving -9 degrees keeps within the 90-degree limit
+    if (putter - nineDegree >= 0) { 
       // Rotate stepper motor -9 degrees
       for (int step = 0; step < nineDegree; step++) {
         digitalWrite(dirPin, LOW); // Set motor direction counterclockwise
@@ -49,13 +47,13 @@ void adjustPutter(){
         digitalWrite(stepPin, LOW);
         delayMicroseconds(2000);
       }
-      putter -= nineDegree; // Update the current step position
+      putter -= nineDegree; 
     }
   }
 
   if (Xbox.getButtonClick(RB, i)){
     Serial.println(F("RB : Increasing Putter Angle"));
-      if (putter + nineDegree <= maxStep) { // Check if moving +9 degrees keeps within the 90-degree limit
+      if (putter + nineDegree <= maxStep) { 
         // Rotate stepper motor 9 degrees
         for (int step = 0; step < nineDegree; step++) {
           digitalWrite(dirPin, HIGH); // Set motor direction clockwise
@@ -64,7 +62,7 @@ void adjustPutter(){
           digitalWrite(stepPin, LOW);
           delayMicroseconds(2000);
         }
-      putter += nineDegree; // Update the current step position
+      putter += nineDegree; 
     }
     }
 }

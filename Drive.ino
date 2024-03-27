@@ -1,5 +1,3 @@
-int i = 0;
-
 void drive(){
   if ((Xbox.getAnalogHat(RightHatY, i) > 5000 || Xbox.getAnalogHat(RightHatY, i) < -5000) && (Xbox.getAnalogHat(RightHatX, i) > 5000 || Xbox.getAnalogHat(RightHatX, i) < -5000)) {
         int rightHatX = Xbox.getAnalogHat(RightHatX, i);

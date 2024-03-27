@@ -1,4 +1,4 @@
-int i = 0;
+
 
 void laser(){
   if (Xbox.getButtonClick(B, i)){
