@@ -1,5 +1,7 @@
+int deadZone = 7500//Used to avoid drift
+
 void drive(){
-  if ((Xbox.getAnalogHat(RightHatY, i) > 5000 || Xbox.getAnalogHat(RightHatY, i) < -5000) && (Xbox.getAnalogHat(RightHatX, i) > 5000 || Xbox.getAnalogHat(RightHatX, i) < -5000)) {
+  if ((Xbox.getAnalogHat(RightHatY, i) > deadZone || Xbox.getAnalogHat(RightHatY, i) < -deadZone) && (Xbox.getAnalogHat(RightHatX, i) > deadZone || Xbox.getAnalogHat(RightHatX, i) < -deadZone)) {
         int rightHatX = Xbox.getAnalogHat(RightHatX, i);
         int rightHatY = Xbox.getAnalogHat(RightHatY, i);
 
@@ -8,18 +10,17 @@ void drive(){
     int rightSpeed = map(rightHatX, -32768, 32767, -400, 400);
 
         moveRobot(leftSpeed, rightSpeed);
-        //stopIfFault();
   } 
 
-  else if(Xbox.getAnalogHat(RightHatY, i) > 5000 || Xbox.getAnalogHat(RightHatY, i) < -5000){
+  else if(Xbox.getAnalogHat(RightHatY, i) > deadZone || Xbox.getAnalogHat(RightHatY, i) < -deadZone){
     int rightHatY = Xbox.getAnalogHat(RightHatY, i);
 
     int speed = map(rightHatY, -32768, 32767, -400, 400);
 
-    moveRobot(speed,speed);
+    moveRobot(speed, -speed);
   }
 
-  else if(Xbox.getAnalogHat(RightHatX, i) > 5000){
+  else if(Xbox.getAnalogHat(RightHatX, i) > deadZone){
     int rightHatX = Xbox.getAnalogHat(RightHatX, i);
 
     int speed = map(rightHatX, -32768, 32767, -400, 400);
@@ -27,12 +28,12 @@ void drive(){
     moveRobot(speed,0); //turn right
   }
 
-  else if(Xbox.getAnalogHat(RightHatX, i) < -5000){
+  else if(Xbox.getAnalogHat(RightHatX, i) < -deadZone){
     int rightHatX = Xbox.getAnalogHat(RightHatX, i);
 
     int speed = map(rightHatX, -32768, 32767, -400, 400);
 
-    moveRobot(0,speed); //turn left
+    moveRobot(0,-speed); //turn left
   }
   else{
     moveRobot(0,0);
@@ -49,17 +50,4 @@ void killDrive(){
   md.setM1Speed(0);
   md.setM2Speed(0);
   //Write to LCD Screen - Error
-}
-
-void stopIfFault(){
-  if (md.getM1Fault())
-  {
-    Serial.println("M1 fault");
-    while(1);
-  }
-  if (md.getM2Fault())
-  {
-    Serial.println("M2 fault");
-    while(1);
-  }
 }

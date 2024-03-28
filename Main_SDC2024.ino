@@ -9,8 +9,8 @@
 #include <SPI.h>
 
 SoftwareSerial mySerial(52,53); //Define software serial, 53 is TX, 52 is RX
-char buff[4]={0x80,0x06,0x03,0x77}; //distance
-unsigned char data[11]={0}; //distance
+char buff[4]={0x80,0x06,0x03,0x77}; //distance sensor
+unsigned char data[11]={0}; //distance sensor
 
 DualVNH5019MotorShield md;
 
@@ -21,9 +21,9 @@ const int stepPin = 8;
 
 USB Usb;
 XBOXRECV Xbox(&Usb);
-int i = 0; //controller initialization
+int i = 0; //controller initialization - only one controller so always 0
 
-bool laserStatus = false;
+bool laserStatus = false; //initialize laser to false/off
 
 void setup() {
   Serial.begin(115200);
@@ -45,12 +45,18 @@ void setup() {
   md.init(); //motors
 
   digitalWrite(31,LOW); // initialize laser to off
+
+  myservo.write(45); //initalizie servo to 45 degrees    
+  delay(5);  
 }
 
-void drive(); 
-void arm();
-void laser();
-void distance();
+void drive(); //drive robot depending on joystick input
+void arm(); //main function swings club using servo
+void laser(); //turns on/off laser
+void distance(); //reads and outputs distance + calculates force
+void killDrive(); //turns all motors off if error
+void killSensors(); //turns all sensors/lasers off if error
+void moveRobot(); //sets speeds of motors
 
 void loop(){
   
@@ -58,8 +64,8 @@ void loop(){
 
   if (Xbox.XboxReceiverConnected) {
     if (Xbox.Xbox360Connected[0]) {
-      drive();
-      arm();
+      drive(); 
+      arm(); 
       laser();
       distance();
     }
