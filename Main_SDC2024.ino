@@ -25,6 +25,19 @@ int i = 0; //controller initialization - only one controller so always 0
 
 bool laserStatus = false; //initialize laser to false/off
 
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
+
+#include <DHT.h> //Call Sensor Library
+#define Type DHT11 //Declare Constant Type DHT11
+int senPin=13; //Declare Variable for Sensor on Digital Pin 13;
+DHT HT(senPin,Type); //Create Virtual Object and Assign to senPin
+float tempC; //Declare Float Variable for Temperature Value in Celcius
+float tempF; //Declare Float Variable for Temperature Value in Farenheit
+int dT=3000; //Declare Integer Variable for Delay Time
+
+
 void setup() {
   Serial.begin(115200);
 
@@ -48,6 +61,10 @@ void setup() {
 
   myservo.write(45); //initalizie servo to 45 degrees    
   delay(5);  
+  Serial.begin(9600);
+  lcd.init(); // initialize the lcd 
+  HT.begin(); //Activate Sensor
+  delay(dT); //Delay Sensor Reading
 }
 
 void drive(); //drive robot depending on joystick input
