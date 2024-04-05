@@ -61,7 +61,9 @@ void setup() {
 
   myservo.write(45); //initalizie servo to 45 degrees    
   delay(5);  
+  
   Serial.begin(9600);
+
   lcd.init(); // initialize the lcd 
   HT.begin(); //Activate Sensor
   delay(dT); //Delay Sensor Reading
