@@ -49,5 +49,8 @@ void moveRobot(int leftSpeed, int rightSpeed) {
 void killDrive(){
   md.setM1Speed(0);
   md.setM2Speed(0);
-  //Write to LCD Screen - Error
+    lcd.setCursor(0,3);
+    lcd.print("                    ");
+    lcd.setCursor(1,3);
+    lcd.print("ERROR DISCONNECTED");
 }

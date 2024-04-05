@@ -33,6 +33,11 @@ void arm(){
         myservo.write(pos);             
         delay(stepDelay);              
       }
+
+        lcd.setCursor(0,3);
+        lcd.print("                    ");
+        lcd.setCursor(1,3);
+        lcd.print("SWING!");
  }
 
     adjustPutter();
@@ -54,6 +59,18 @@ void adjustPutter(){
         delayMicroseconds(2000);
       }
       putter -= nineDegree; 
+
+        lcd.setCursor(0,3);
+        lcd.print("                    ");
+        lcd.setCursor(1,3);
+        lcd.print("Decreasing Putter");
+
+        lcd.setCursor(16,2);
+        lcd.print("  ");
+
+        lcd.setCursor(16,2);
+        lcd.print(putter);
+
     }
   }
 
@@ -69,6 +86,17 @@ void adjustPutter(){
           delayMicroseconds(2000);
         }
       putter += nineDegree; 
+
+        lcd.setCursor(0,3);
+        lcd.print("                    ");
+        lcd.setCursor(1,3);
+        lcd.print("Increasing Putter");
+
+        lcd.setCursor(16,2);
+        lcd.print("  ");
+
+        lcd.setCursor(16,2);
+        lcd.print(putter);
     }
     }
 }
@@ -80,10 +108,32 @@ void adjustPower(){ // or adjust position
     if(stepDelay >1){ //ensure stepDelay doesnt go below 0
       stepDelay -= 5; // Smaller the number the faster
       Serial.println(F("Up : Increasing Force " ));
+
+        lcd.setCursor(0,3);
+        lcd.print("                    ");
+        lcd.setCursor(1,3);
+        lcd.print("Increasing Force " );
+
+        lcd.setCursor(13,1);
+        lcd.print("  ");
+
+        lcd.setCursor(13,1);
+        lcd.print(stepDelay);
     }
   }
     if (Xbox.getButtonClick(DOWN, i)) {
       Serial.println(F("Down : Decreasing Force "));
       stepDelay += 5;
+
+        lcd.setCursor(0,3);
+        lcd.print("                    ");
+        lcd.setCursor(1,3);
+        lcd.print("Decreasing Force" );
+
+        lcd.setCursor(13,1);
+        lcd.print("  ");
+
+        lcd.setCursor(13,1);
+        lcd.print(stepDelay);
     }
   }

@@ -61,7 +61,7 @@ void setup() {
 
   myservo.write(45); //initalizie servo to 45 degrees    
   delay(5);  
-  
+
   Serial.begin(9600);
 
   lcd.init(); // initialize the lcd 
@@ -76,6 +76,7 @@ void distance(); //reads and outputs distance + calculates force
 void killDrive(); //turns all motors off if error
 void killSensors(); //turns all sensors/lasers off if error
 void moveRobot(); //sets speeds of motors
+void temp();
 
 void loop(){
   
@@ -86,7 +87,9 @@ void loop(){
       drive(); 
       arm(); 
       laser();
-      distance();
+      temp();
+      //distance();
+
     }
     else{
       killDrive(); //kill drive motors if controller disconnects

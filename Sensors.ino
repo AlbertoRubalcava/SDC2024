@@ -7,11 +7,21 @@ void laser(){
       Serial.println(F("B : Laser OFF"));
       laserStatus = false;
       digitalWrite(31,LOW);
+
+        lcd.setCursor(0,3);
+        lcd.print("                    ");
+        lcd.setCursor(1,3);
+        lcd.print("LASER OFF");
     }
     else{
       Serial.println(F("B : Laser ON"));
       laserStatus = true;
       digitalWrite(31,HIGH);
+
+        lcd.setCursor(0,3);
+        lcd.print("                    ");
+        lcd.setCursor(1,3);
+        lcd.print("LASER ON");
     }
   }
 } 
@@ -55,5 +65,4 @@ void distance(){
 
 void killSensors(){
   digitalWrite(31, LOW);
-  //turn distance sensor off
 }
